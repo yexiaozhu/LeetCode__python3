@@ -2,42 +2,24 @@
 # coding = utf-8
 # author = yexiaozhu
 
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-
 class Solution:
-    def addTwoNumbers(self, l1, l2):
+    def lengthOfLongestSubstring(self, s):
         """
-        :param l1:  ListNode
-        :param l2:  ListNode
-        :return:  ListNode
+        :param s: str
+        :return:  int
         """
-        if l1 == None: return l2
-        if l2 == None: return l1
-        dummy_head = ListNode(0)
-        pt = dummy_head  # 指针
-        carry = 0  # 进位
-        while l1 or l2 or carry:
-            sum, carry = carry, 0
-            print("sum:", sum)
-            if l1:
-                sum += l1.val
-                l1 = l1.next
-                # print(l1)
-                print("suml1:", sum)
-            if l2:
-                sum += l2.val
-                l2 = l2.next
-                # print(l2)
-                print("suml2:", sum)
-            if sum > 9:
-                carry = 1
-                sum -= 10
-            pt.next = ListNode(sum)
-            pt = pt.next
-            # print("pt:",pt)
-            # print("listNodeToString(pt):",listNodeToString(pt))
-        return dummy_head.next
+        start = 0
+        max_length = 0
+        substring = {}
+        for i, c in enumerate(s):
+            if c in substring and start <= substring[c]:#只有当重复值是在start后面出现时才移动start
+                start = substring[c] + 1
+                print(substring)
+            else:
+                max_length = max(max_length, i - start + 1)
+            substring[c] = i
+            
+        return max_length
+    
+if __name__ == '__main__':
+    Solution().lengthOfLongestSubstring("abcabcbb")
