@@ -3,25 +3,39 @@
 # author = yexiaozhu
 
 class Solution:
-    def findMedianSortedArrays(self, nums1, nums2):
+    def longestPalindrome(self, s):
         """
-        :param nums1: List[int]
-        :param nums2: List[int]
-        :return: float
+        :param s: str
+        :return:  str
         """
-        nums1.extend(nums2)
-        nums1.sort()
-        k = len(nums1)
-        if k % 2 == 1:
-            q = k - 1
-            p = nums1[int(q/2)]
-        else:
-            p = (nums1[int(k/2 -1)] + nums1[int(k/2)])/2
-        print(p)
-        return p
-            
+        begin = end = 0
+        table = []
+        for i in range(len(s)):
+            tem = []
+            for j in range(len(s)):
+                tem.append(0)
+            table.append(tem)
+        # print(table)
+        for i in range(len(s)):
+            table[i][i] = 1
+        # print(table)
+        for i in range(len(s) - 1):
+            if s[i] == s[i+1]:
+                table[i][i+1] = 1
+                begin = i
+                end = 1
+                
+        for tem in range(1, len(s)):
+            for i in range(len(s) - tem):
+                j = i+tem
+                if (s[i]==s[j] and table[i+1][j-1]==1):
+                    table[i][j] = 1
+                    end = tem
+                    begin = i
+        # print(table)
+        print(s[begin:begin+end+1])
+        return s[begin:begin+end+1]
         
         
 if __name__ == '__main__':
-    # Solution().findMedianSortedArrays([1, 2], [3, 4])
-    Solution().findMedianSortedArrays([1, 3], [2])
+    Solution().longestPalindrome("babad")
