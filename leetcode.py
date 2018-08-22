@@ -3,23 +3,25 @@
 # author = yexiaozhu
 
 class Solution:
-    def lengthOfLongestSubstring(self, s):
+    def findMedianSortedArrays(self, nums1, nums2):
         """
-        :param s: str
-        :return:  int
+        :param nums1: List[int]
+        :param nums2: List[int]
+        :return: float
         """
-        start = 0
-        max_length = 0
-        substring = {}
-        for i, c in enumerate(s):
-            if c in substring and start <= substring[c]:#只有当重复值是在start后面出现时才移动start
-                start = substring[c] + 1
-                print(substring)
-            else:
-                max_length = max(max_length, i - start + 1)
-            substring[c] = i
+        nums1.extend(nums2)
+        nums1.sort()
+        k = len(nums1)
+        if k % 2 == 1:
+            q = k - 1
+            p = nums1[int(q/2)]
+        else:
+            p = (nums1[int(k/2 -1)] + nums1[int(k/2)])/2
+        print(p)
+        return p
             
-        return max_length
-    
+        
+        
 if __name__ == '__main__':
-    Solution().lengthOfLongestSubstring("abcabcbb")
+    # Solution().findMedianSortedArrays([1, 2], [3, 4])
+    Solution().findMedianSortedArrays([1, 3], [2])
