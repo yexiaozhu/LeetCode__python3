@@ -3,28 +3,22 @@
 # author = yexiaozhu
 
 class Solution:
-    def reverse(self, x):
+    def myAtoi(self, str):
         """
-        :param x: int
-        :return:  int
+        :param str: str
+        :return: int
         """
-        result = 0
-        flag = 1
-        if x < 0:
-            x = -x
-            flag = 0
-        while(x):
-            a = x%10
-            result = result*10 + a
-            # print(result)
-            x = x//10
-        if result>2**31-1 or result<-2**31:
-            return 0
+        import re
+        res = re.findall(r"^[\+\-]?\d+", str.strip())
+        print(res)
+        if res != []:
+            if int(res[0]) > (2**31-1):
+                return (2**31-1)
+            if int(res[0]) < (-2**31):
+                return (-2**31)
+            return int(res[0])
         else:
-            if flag==0:
-                return -result
-            else:
-                return result
+            return 0
         
 if __name__ == '__main__':
-    Solution().reverse(123)
+    print(Solution().myAtoi('-91283472332'))
