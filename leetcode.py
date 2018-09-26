@@ -4,25 +4,22 @@
 
 import re
 class Solution:
-    def maxArea(self, height):
+    def intToRoman(self, num):
         """
-        :param height:  List[int]
-        :return:  int
+        :param num: int
+        :return: str
         """
-        if height == []:
+        if num > 3999 or num < 1:
             return 0
-        l = len(height)
-        ans = 0
-        
-        p1 = 0
-        p2 = l - 1
-        while p1 < p2:
-            ans = max(ans, min(height[p1], height[p2])*(p2-p1))
-            if height[p1] < height[p2]:
-                p1+=1
-            else:
-                p2-=1
-        return ans
+        num_tuple = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+        roman_tuple = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I']
+        result_str = ""
+        for i in range(len(num_tuple)):
+            while num >= num_tuple[i]:
+                num -= num_tuple[i]
+                # print(result_str)
+                result_str += roman_tuple[i]
+        return result_str
         
 if __name__ == '__main__':
-    print(Solution().maxArea([1,8,6,2,5,4,8,3,7]))
+    print(Solution().intToRoman(58))
