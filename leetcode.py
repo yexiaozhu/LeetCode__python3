@@ -3,22 +3,15 @@
 # author = yexiaozhu
 
 class Solution:
-    def myAtoi(self, str):
+    def isPalindrome(self, x):
         """
-        :param str: str
-        :return: int
+        :param x:  int
+        :return:  bool
         """
-        import re
-        res = re.findall(r"^[\+\-]?\d+", str.strip())
-        print(res)
-        if res != []:
-            if int(res[0]) > (2**31-1):
-                return (2**31-1)
-            if int(res[0]) < (-2**31):
-                return (-2**31)
-            return int(res[0])
+        if str(x) == str(x)[::-1]:
+            return True
         else:
-            return 0
+            return False
         
 if __name__ == '__main__':
-    print(Solution().myAtoi('-91283472332'))
+    print(Solution().isPalindrome("122"))
