@@ -2,16 +2,21 @@
 # coding = utf-8
 # author = yexiaozhu
 
+import re
 class Solution:
-    def isPalindrome(self, x):
+    def isMatch(self, s, p):
         """
-        :param x:  int
-        :return:  bool
+        :param s: str
+        :param p: str
+        :return: bool
         """
-        if str(x) == str(x)[::-1]:
-            return True
-        else:
+        ans = (re.match(p, s))
+        if (ans == None):
             return False
+        if (ans.group(0) != s):
+            return False
+        return True
+        
         
 if __name__ == '__main__':
-    print(Solution().isPalindrome("122"))
+    print(Solution().isMatch("ab", ".*c"))
