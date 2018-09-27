@@ -4,22 +4,24 @@
 
 import re
 class Solution:
-    def intToRoman(self, num):
+    def romanToInt(self, s):
         """
-        :param num: int
-        :return: str
+        :param s: str
+        :return: int
         """
-        if num > 3999 or num < 1:
-            return 0
-        num_tuple = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
-        roman_tuple = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I']
-        result_str = ""
-        for i in range(len(num_tuple)):
-            while num >= num_tuple[i]:
-                num -= num_tuple[i]
-                # print(result_str)
-                result_str += roman_tuple[i]
-        return result_str
-        
+        num_tuple = [1000, 500, 100, 50, 10, 5, 1]
+        roman_tuple = ['M', 'D','C', 'L', 'X', 'V', 'I']
+        merge_dic = dict(zip(roman_tuple, num_tuple))
+        print(merge_dic)
+        num = 0
+        for i in range(len(s) - 1):
+            print(merge_dic[s[i]])
+            if merge_dic[s[i]] < merge_dic[s[i+1]]:
+                num -= merge_dic[s[i]]
+            else:
+                num += merge_dic[s[i]]
+        num += merge_dic[s[-1]]
+        return num
+    
 if __name__ == '__main__':
-    print(Solution().intToRoman(58))
+    print(Solution().romanToInt("IV"))
