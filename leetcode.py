@@ -4,24 +4,24 @@
 
 import re
 class Solution:
-    def romanToInt(self, s):
+    def longestCommonPrefix(self, strs):
         """
-        :param s: str
-        :return: int
+        :param strs: List[str]
+        :return: str
         """
-        num_tuple = [1000, 500, 100, 50, 10, 5, 1]
-        roman_tuple = ['M', 'D','C', 'L', 'X', 'V', 'I']
-        merge_dic = dict(zip(roman_tuple, num_tuple))
-        print(merge_dic)
-        num = 0
-        for i in range(len(s) - 1):
-            print(merge_dic[s[i]])
-            if merge_dic[s[i]] < merge_dic[s[i+1]]:
-                num -= merge_dic[s[i]]
+        res = ""
+        if len(strs) == 0:
+            return ""
+        print(zip(*strs))
+        for each in zip(*strs):
+            print(each)
+            print(set(each))
+            if len(set(each)) == 1:
+                res += each[0]
             else:
-                num += merge_dic[s[i]]
-        num += merge_dic[s[-1]]
-        return num
+                return res
+        return res
+        
     
 if __name__ == '__main__':
-    print(Solution().romanToInt("IV"))
+    print(Solution().longestCommonPrefix(["flower","flow","flight"]))
