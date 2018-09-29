@@ -4,32 +4,31 @@
 
 import re
 class Solution:
-    def threeSumClosest(self, nums, target):
+    def letterCombination(self, digits):
         """
-        :param nums:  List[int]
-        :param target: int
-        :return: int
+        :param digits:  str
+        :return:  List[str]
         """
-        mindiff = 10000
-        nums.sort()
-        res = 0
-        for i in range(len(nums)):
-            left = i + 1
-            right = len(nums) - 1
-            while left < right:
-                sum = nums[left] + nums[right] + nums[i]
-                diff = abs(target - sum)
-                if diff < mindiff:
-                    mindiff = diff
-                    res = sum
-                if target == sum:
-                    return sum
-                elif sum < target:
-                    left += 1
-                else:
-                    right -= 1
+        if not digits:
+            return []
+        digit2chars = {
+            '2': 'abc',
+            '3': 'def',
+            '4': 'ghi',
+            '5': 'jkl',
+            '6': 'mno',
+            '7': 'pqrs',
+            '8': 'tuv',
+            '9': 'wxyz'
+        }
+        res = [i for i in digit2chars[digits[0]]]
+        print(res)
+        for i in digits[1:]:
+            print(i)
+            print(digit2chars[i])
+            res = [m+n for m in res for n in digit2chars[i]]
+            print(res)
         return res
-
-
+    
 if __name__ == '__main__':
-    print(Solution().threeSumClosest([-1, 2, 1, -4], 1))
+    print(Solution().letterCombination("2342"))
