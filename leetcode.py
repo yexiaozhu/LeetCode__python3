@@ -2,41 +2,40 @@
 # coding = utf-8
 # author = yexiaozhu
 
-class Solution:
-    def fourSum(self, nums, target):
-        nums.sort()
-        results = []
-        self.findNsum(nums, target, 4, [], results)
-        return results
-    
-    def findNsum(self, nums, target, N, result, results):
-        if len(nums) < N or N < 2: return
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
         
-        if N == 2:
-            l, r = 0, len(nums) - 1
-            while l < r:
-                if nums[l] + nums[r] == target:
-                    results.append(result + [nums[l], nums[r]])
-                    print(result)
-                    l += 1
-                    r -= 1
-                    while l < r and nums[l] == nums[l - 1]:
-                        l += 1
-                    while l < r and nums[r] == nums[r + 1]:
-                        r -= 1
-                elif nums[l] + nums[r] < target:
-                    l += 1
-                else:
-                    r -= 1
+    def get_data(self):
+        return self.data
+        
+class Solution:
+    def removeNthFromEnd(self, head, n):
+        """
+        :param head: ListNode
+        :param n: int
+        :return: ListNode
+        """
+        list = []
+        count = 0
+        print(ListNode(0))
+        while(head):
+            list.append(head)
+            head = head.next
+            count += 1
+        if count == 1:
+            return None
+        print(list)
+        if list[-n].next == None:
+            list[-n-1].next = None
+            return list[0]
         else:
-            for i in range(0, len(nums) - N + 1):  # careful about range
-                print(i, nums[i], nums[i-1], target, nums[i]*N, nums[-1]*N, result)
-                if target < nums[i] * N or target > nums[-1] * N:  # take advantages of sorted list
-                    break
-                if i == 0 or i > 0 and nums[i - 1] != nums[i]:  # recursively reduce N
-                    self.findNsum(nums[i + 1:], target - nums[i], N - 1, result + [nums[i]], results)
-        return
-
+            list[-n].val = list[-n].next.val
+            list[-n].next = list[-n].next.next
+        return list[0]
+        
 
 if __name__ == '__main__':
-    print(Solution().fourSum([1, 0, -1, 0, -2, 2], 0))
+    print(ListNode(1).val)
+    # print(Solution().removeNthFromEnd([1,2,3,4,5], 2))
