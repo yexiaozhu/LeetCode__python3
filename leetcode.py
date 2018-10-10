@@ -2,23 +2,43 @@
 # coding = utf-8
 # author = yexiaozhu
 
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
 class Solution:
-    def isValid(self, s):
+    def mergeTwoLists(self, l1, l2):
         """
-        :param s: str
-        :return: bool
+        :param l1: ListNode
+        :param l2: ListNode
+        :return: ListNode
         """
-        a = {')':'(', ']':'[', '}':'{'}
-        l = [None]
-        # print(len(l))
-        for i in s:
-            # print(i)
-            if i in a and a[i] == l[-1]:
-                # print(i, a[i], l, l[-1])
-                l.pop()
+        if l1 == None: return l2
+        if l2 == None: return l1
+        
+        head = None
+        if l1.val < l2.val:
+            head = l1
+            l1 = l1.next
+        else:
+            head = l2
+            l2 = l2.next
+        mylist = head
+        while l1 != None and l2 != None:
+            if l1.val < l2.val:
+                mylist.next = l1
+                l1 = l1.next
             else:
-                l.append(i)
-        return len(l)==1
+                mylist.next = l2
+                l2 = l2.next
+            mylist = mylist.next
+        if l1 == None:
+            mylist.next = l2
+        else:
+            mylist.next = l1
+        return head
+        
         
 
 if __name__ == '__main__':
