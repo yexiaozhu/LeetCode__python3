@@ -2,40 +2,25 @@
 # coding = utf-8
 # author = yexiaozhu
 
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-        
-    def get_data(self):
-        return self.data
-        
 class Solution:
-    def removeNthFromEnd(self, head, n):
+    def isValid(self, s):
         """
-        :param head: ListNode
-        :param n: int
-        :return: ListNode
+        :param s: str
+        :return: bool
         """
-        list = []
-        count = 0
-        print(ListNode(0))
-        while(head):
-            list.append(head)
-            head = head.next
-            count += 1
-        if count == 1:
-            return None
-        print(list)
-        if list[-n].next == None:
-            list[-n-1].next = None
-            return list[0]
-        else:
-            list[-n].val = list[-n].next.val
-            list[-n].next = list[-n].next.next
-        return list[0]
+        a = {')':'(', ']':'[', '}':'{'}
+        l = [None]
+        # print(len(l))
+        for i in s:
+            # print(i)
+            if i in a and a[i] == l[-1]:
+                # print(i, a[i], l, l[-1])
+                l.pop()
+            else:
+                l.append(i)
+        return len(l)==1
         
 
 if __name__ == '__main__':
-    print(ListNode(1).val)
-    # print(Solution().removeNthFromEnd([1,2,3,4,5], 2))
+    print(Solution().isValid('()[]{}'))
+    print(Solution().isValid(''))
