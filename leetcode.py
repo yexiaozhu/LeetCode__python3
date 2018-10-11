@@ -2,30 +2,30 @@
 # coding = utf-8
 # author = yexiaozhu
 
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+        
 class Solution:
-    def generateParentheses(self, n):
+    def mergeKLists(self, lists):
         """
-        :param n: int
-        :return: List[str]
+        :param lists: List[ListNode]
+        :return:  ListNode
         """
         res = []
-        self.generate(n, n, "", res)
-        return res
-    
-    def generate(self, left, right, str, res):
-        if left == 0 and right == 0:
-            res.append(str)
-            print(res)
-            return
-        if left > 0:
-            print('left:', left, str)
-            self.generate(left-1, right, str+'(', res)
-        if right > left:
-            print('right', right, str)
-            self.generate(left, right-1, str+')', res)
-            
-if __name__ == '__main__':
-    print(Solution().generateParentheses(3))
-
+        for i in lists:
+            while i:
+                res.append(i.val)
+                i = i.next
+        if res == []:
+            return []
+        res.sort()
+        l = ListNode(0)
+        first = l
+        while res:
+            l.next = ListNode(res.pop(0))
+            l = l.next
+        return first.next
         
 
