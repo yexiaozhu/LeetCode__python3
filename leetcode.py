@@ -8,24 +8,24 @@ class ListNode:
         self.next = None
         
 class Solution:
-    def mergeKLists(self, lists):
+    def swapPairs(self, head):
         """
-        :param lists: List[ListNode]
-        :return:  ListNode
+        :param head: ListNode
+        :return: ListNode
         """
-        res = []
-        for i in lists:
-            while i:
-                res.append(i.val)
-                i = i.next
-        if res == []:
-            return []
-        res.sort()
-        l = ListNode(0)
-        first = l
-        while res:
-            l.next = ListNode(res.pop(0))
-            l = l.next
+        if head == None:
+            return head
+        cur = ListNode(0)
+        cur.next = head
+        first = cur
+        while cur.next and cur.next.next:
+            n1 = cur.next
+            n2 = n1.next
+            nxt = n2.next
+            n1.next = nxt
+            n2.next = n1
+            cur.next = n2
+            cur = n1
         return first.next
         
 
